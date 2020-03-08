@@ -15,17 +15,49 @@
 		border-radius: 5px;
 		border: 1px solid black;
 	}
+	.feedbackButton {
+		width: 100px;
+		height: 40px;
+		text-align: center;
+		right: -30px;
+		top: 50%;
+		transform: translate(0px, -50%) rotate(-90deg);
+		background-color: lightblue;
+		color: blue;
+		border-radius: 5px;
+		position: absolute;
+		cursor: pointer;
+		font-size: 16px;
+	}
+
+	.controlPanel {
+		display: none;
+	}
+	.close-feedback-button {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		cursor: pointer;
+	}
+	.controlPanelWrapper {
+		display: absolute;
+	}
 </style>
 
 <title>Feedback tool demo</title>
 <h1>Feedback tool demo</h1>
 
-<br /><br />
-
-<button id="btn-test-getDisplayMedia">Start recording</button>
-<button id="btn-stop-getDisplayMedia">Stop recording</button>
-<button id="btn-start-painting">Start painting</button>
-<button id="btn-screenshot">Screenshot</button>
+<button id="feedback-button" class="feedbackButton">Feedback</button>
+<div id="control-panel" class="controlPanel">
+	<div class="controlPanelWrapper">
+		<h3>Feedback</h3>
+		<div id="close-feedback-button" class="close-feedback-button">X</div>
+		<button id="btn-test-getDisplayMedia">Start recording</button>
+		<button id="btn-stop-getDisplayMedia">Stop recording</button>
+		<button id="btn-start-painting">Start painting</button>
+		<button id="btn-screenshot">Screenshot</button>
+	</div>
+</div>
 
 <hr />
 <video controls autoplay playsinline muted="false" volume="0"></video>
@@ -37,6 +69,7 @@
 
 <script type="text/javascript" src="record-screen.js"></script>
 <script type="text/javascript" src="paint-screen.js"></script>
+<script type="text/javascript" src="main.js"></script>
 <script
 	type="text/javascript"
 	src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"
