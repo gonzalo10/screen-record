@@ -8,9 +8,7 @@ buttonPaint.onclick = function() {
 	createCanvasOverlay('rgba(0,0,0,0)');
 };
 buttonScreenShot.onclick = function() {
-	html2canvas(document.body).then(function(canvas) {
-		paintScreenshot(canvas.toDataURL());
-	});
+	createScreenShot().then(canvas => paintScreenshot(canvas.toDataURL()));
 };
 
 function createCanvasOverlay(color, canvasContainer) {
@@ -18,11 +16,17 @@ function createCanvasOverlay(color, canvasContainer) {
 		const container = createOrAssignContainter(canvasContainer);
 		const context = createCanvas(color, container);
 
-		var closeButton = createButton('CLOSE', hideCanvas);
-		container.canvasContainer.appendChild(closeButton);
-		var closeButton = createButton('Screen', hideCanvas);
-		container.canvasContainer.appendChild(closeButton);
+		// create control panel
 
+		var controlPanel = createDiv();
+		var closeButton = createButton('CLOSE', hideCanvas);
+		controlPanel.appendChild(closeButton);
+		var closeButton = createButton('ScreenShot', createAndPaintScreenshot);
+		controlPanel.appendChild(closeButton);
+		container.canvasContainer.appendChild(controlPanel);
+
+		// here we can add new colors and withs to the line
+		// TODO add arrows and squares, and text box
 		context.strokeStyle = 'rgb(0,255,0)'; // a green line
 		context.lineWidth = 4; // 4 pixels thickness
 		myCanvas.parentNode.addEventListener(
@@ -40,7 +44,6 @@ function createCanvasOverlay(color, canvasContainer) {
 			onMouseClickOnMyCanvas,
 			false
 		);
-		//alert(myCanvas);
 	} else myCanvas.parentNode.style.visibility = 'visible';
 }
 
@@ -76,16 +79,13 @@ function createCanvas(color, container) {
 	myCanvas = document.createElement('canvas');
 	myCanvas.style.width = container.superContainer.scrollWidth + 'px';
 	myCanvas.style.height = container.superContainer.scrollHeight + 'px';
-	// You must set this otherwise the canvas will be streethed to fit the container
 	myCanvas.width = container.superContainer.scrollWidth;
 	myCanvas.height = container.superContainer.scrollHeight;
-	//surfaceElement.style.width=window.innerWidth;
 	myCanvas.style.overflow = 'visible';
 	myCanvas.style.position = 'absolute';
 	myCanvas.style.left = '0px';
 	myCanvas.style.top = '0px';
 	var context = myCanvas.getContext('2d');
-	console.log('color', color);
 	context.fillStyle = color;
 	context.fillRect(0, 0, myCanvas.width, myCanvas.height);
 	container.canvasContainer.appendChild(myCanvas);
@@ -106,21 +106,39 @@ function createOrAssignContainter(canvasContainer) {
 	return { canvasContainer, superContainer };
 }
 
+function createScreenShot() {
+	const canvas = html2canvas(document.body);
+	return canvas;
+}
+
 function paintScreenshot(screenshotUrl) {
 	screenshotImg.src = screenshotUrl;
 }
 
+function createAndPaintScreenshot() {
+	return createScreenShot().then(canvas => paintScreenshot(canvas.toDataURL()));
+}
+
 function createButton(text, buttonAction) {
-	var closeButton = document.createElement('div');
-	closeButton.style.position = 'relative';
-	closeButton.style.float = 'right';
+	var closeButton = document.createElement('button');
 	closeButton.onclick = buttonAction;
-	closeButton.style.left = '20px';
-	closeButton.style.top = '14px';
-	closeButton.style.width = '50px';
-	closeButton.style.height = '20px';
 	closeButton.style.background = '#f00';
 	closeButtonText = document.createTextNode(text);
 	closeButton.appendChild(closeButtonText);
 	return closeButton;
+}
+function createDiv() {
+	var div = document.createElement('div');
+	div.style.position = 'absolute';
+	div.style.left = '50%';
+	div.style.top = '0';
+	div.style.transform = 'translate(-50%)';
+	div.style.width = '300px';
+	div.style.height = '50px';
+	div.style.background = 'transparent';
+	div.style.border = '1px solid lightblue';
+	div.style.display = 'flex';
+	div.style.alignItems = 'center';
+	div.style.justifyContent = 'space-evenly';
+	return div;
 }
