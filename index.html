@@ -27,15 +27,9 @@
 <button id="btn-start-painting">Start painting</button>
 <button id="btn-screenshot">Screenshot</button>
 
-<p>
-	<a href="javascript:createCanvasOverlay('rgba(0,0,0,0)');">Activate</a>
-</p>
-<p>
-	<a href="javascript:takeScreenShot();">Screenshot</a>
-</p>
-
 <hr />
 <video controls autoplay playsinline muted="false" volume="0"></video>
+<img id="screenshot" width="300px" height="200px" />
 
 <br />
 
@@ -43,5 +37,9 @@
 
 <script type="text/javascript" src="record-screen.js"></script>
 <script type="text/javascript" src="paint-screen.js"></script>
+<script
+	type="text/javascript"
+	src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"
+></script>
 
 <script src="https://www.webrtc-experiment.com/common.js"></script>

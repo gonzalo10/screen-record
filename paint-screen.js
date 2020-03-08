@@ -1,5 +1,6 @@
 var buttonPaint = document.querySelector('#btn-start-painting');
 var buttonScreenShot = document.querySelector('#btn-screenshot');
+var screenshotImg = document.getElementById('screenshot');
 
 var myCanvas;
 
@@ -7,7 +8,9 @@ buttonPaint.onclick = function() {
 	createCanvasOverlay('rgba(0,0,0,0)');
 };
 buttonScreenShot.onclick = function() {
-	takeScreenShot();
+	html2canvas(document.body).then(function(canvas) {
+		paintScreenshot(canvas.toDataURL());
+	});
 };
 
 function createCanvasOverlay(color, canvasContainer) {
@@ -103,11 +106,8 @@ function createOrAssignContainter(canvasContainer) {
 	return { canvasContainer, superContainer };
 }
 
-function takeScreenShot() {
-	const container = createOrAssignContainter();
-	const context = createCanvas('rgba(0,0,0,0)', container);
-	const screenshot = context.canvas.toDataURL();
-	return screenshot;
+function paintScreenshot(screenshotUrl) {
+	screenshotImg.src = screenshotUrl;
 }
 
 function createButton(text, buttonAction) {
