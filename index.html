@@ -17,13 +17,22 @@
 	}
 </style>
 
-<title>Screen recording demo</title>
-<h1>Screen recording demo</h1>
+<title>Feedback tool demo</title>
+<h1>Feedback tool demo</h1>
 
 <br /><br />
 
 <button id="btn-test-getDisplayMedia">Start recording</button>
-<button id="btn-stop-getDisplayMedia">Stop</button>
+<button id="btn-stop-getDisplayMedia">Stop recording</button>
+<button id="btn-start-painting">Start painting</button>
+<button id="btn-screenshot">Screenshot</button>
+
+<p>
+	<a href="javascript:createCanvasOverlay('rgba(0,0,0,0)');">Activate</a>
+</p>
+<p>
+	<a href="javascript:takeScreenShot();">Screenshot</a>
+</p>
 
 <hr />
 <video controls autoplay playsinline muted="false" volume="0"></video>
@@ -32,6 +41,7 @@
 
 <br />
 
-<script src="main.js"></script>
+<script type="text/javascript" src="record-screen.js"></script>
+<script type="text/javascript" src="paint-screen.js"></script>
 
 <script src="https://www.webrtc-experiment.com/common.js"></script>

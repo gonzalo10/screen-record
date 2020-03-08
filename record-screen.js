@@ -43,10 +43,6 @@ button.onclick = function() {
 				}
 			}
 
-			console.error(error.name);
-			console.error(error.message);
-			console.error(error.stack);
-
 			alert(
 				'Unable to capture your screen.\n\n' +
 					error.name +
