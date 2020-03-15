@@ -56,6 +56,8 @@
 		<button id="btn-stop-getDisplayMedia">Stop recording</button>
 		<button id="btn-start-painting">Start painting</button>
 		<button id="btn-screenshot">Screenshot</button>
+		<button id="btn-arrow">Draw arrow</button>
+		<button id="btn-rectangle">Draw rectangle</button>
 	</div>
 </div>
 
@@ -63,6 +65,25 @@
 <video controls autoplay playsinline muted="false" volume="0"></video>
 <img id="screenshot" width="300px" height="200px" />
 
+<div style="position:relative;width:600px;height:400px;" id="canvasgroup">
+	<canvas
+		style="
+		position:absolute;
+		top:0px;
+		left:0px;
+		width:100%;
+		height:100%;"
+		id="final"
+		width="600px"
+		height="400px"
+	></canvas>
+	<canvas
+		style="position: absolute; top:0px; left:0px; outline: 1px solid red; width:100%; height:100%;"
+		id="drawing"
+		width="600px"
+		height="400px"
+	></canvas>
+</div>
 <br />
 
 <br />
