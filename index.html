@@ -41,6 +41,7 @@
 	}
 	.controlPanelWrapper {
 		display: absolute;
+		z-index: 9999;
 	}
 </style>
 
@@ -58,6 +59,7 @@
 		<button id="btn-screenshot">Screenshot</button>
 		<button id="btn-arrow">Draw arrow</button>
 		<button id="btn-rectangle">Draw rectangle</button>
+		<button id="btn-comment">Add comment</button>
 	</div>
 </div>
 
@@ -87,10 +89,16 @@
 <br />
 
 <br />
-
+<script>
+	window.onerror = function(msg, url, lineNo, columnNo, error) {
+		console.log('error logger', msg, url, lineNo, columnNo, error);
+		return false;
+	};
+</script>
 <script type="text/javascript" src="record-screen.js"></script>
 <script type="text/javascript" src="paint-screen.js"></script>
 <script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="add-comment.js"></script>
 <script
 	type="text/javascript"
 	src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"

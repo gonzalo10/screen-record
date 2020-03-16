@@ -14,10 +14,11 @@ buttonScreenShot.onclick = function() {
 };
 
 buttonDrawArrow.onclick = function() {
+	console.log('buttonDrawArrow');
 	drawGeometry('arrow');
 };
 buttonDrawRectangle.onclick = function() {
-	// drawArrow('rectangle');
+	console.log('buttonDrawRectangle');
 	drawGeometry('rectangle');
 };
 
@@ -154,24 +155,10 @@ function createDiv() {
 }
 
 function drawGeometry(type) {
-	var canvasgroup = document.getElementById('canvasgroup');
-	const prevCanvas = document.getElementById('drawing');
-	// if (prevCanvas) {
-	// 	prevCanvas.parentNode.removeChild(prevCanvas);
-	// }
-	// var canvas = document.createElement('canvas');
-	// canvas.id = 'drawing';
-	// canvas.style.position = 'absolute';
-	// canvas.style.top = '0px';
-	// canvas.style.left = '0px';
-	// canvas.style.outline = '1px solid red';
-	// canvas.style.width = '100%';
-	// canvas.style.height = '100%';
-	// canvas.style.width = '100%';
-	// canvas.style.height = '100%';
-
-	// canvasgroup.appendChild(canvas);
-	var canvas = document.getElementById('drawing');
+	var old_element = document.getElementById('drawing');
+	var old_element = document.getElementById('drawing');
+	var canvas = old_element.cloneNode(true);
+	old_element.parentNode.replaceChild(canvas, old_element);
 	var ctx = canvas.getContext('2d');
 
 	var canvas2 = document.getElementById('final');
@@ -185,6 +172,7 @@ function drawGeometry(type) {
 	var maxy = 400;
 	var isDown = false;
 
+	console.log('type', type);
 	switch (type) {
 		case 'arrow':
 			drawArrows();
@@ -203,28 +191,27 @@ function drawGeometry(type) {
 			context.stroke();
 		}
 		function handleMouseDown(e) {
-			console.log('handleMouseDown');
 			mouseX = parseInt(e.clientX - offsetX);
 			mouseY = parseInt(e.clientY - offsetY);
 			startX = mouseX;
 			startY = mouseY;
-			ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			isDown = true;
 		}
 		function handleMouseUp(e) {
 			mouseX = parseInt(e.clientX - offsetX);
 			mouseY = parseInt(e.clientY - offsetY);
 			isDown = false;
-			drawRect(mouseX, mouseY, ctx);
-			ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+			drawRect(mouseX, mouseY, ctx2);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
 		}
 
 		function handleMouseMove(e) {
 			if (isDown) {
 				mouseX = parseInt(e.clientX - offsetX);
 				mouseY = parseInt(e.clientY - offsetY);
-				ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
-				drawRect(mouseX, mouseY, ctx2);
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				drawRect(mouseX, mouseY, ctx);
 			}
 		}
 
@@ -237,9 +224,7 @@ function drawGeometry(type) {
 		function drawFilledPolygon(canvas, shape) {
 			canvas.beginPath();
 			canvas.moveTo(shape[0][0], shape[0][1]);
-
 			for (p in shape) if (p > 0) canvas.lineTo(shape[p][0], shape[p][1]);
-
 			canvas.lineTo(shape[0][0], shape[0][1]);
 			canvas.fill();
 		}
@@ -282,6 +267,11 @@ function drawGeometry(type) {
 
 		// Event handlers
 		function mDown(e) {
+			console.log('mDown type', type);
+			if (type !== 'arrow') {
+				console.log('mDown return ');
+				return;
+			}
 			console.log('mDown');
 			read_position();
 			var p = get_offset(e);
