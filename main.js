@@ -31,6 +31,7 @@ closeFeedbackPanel.onclick = function() {
 	applyStyles({ display: 'block' }, feedbackButton);
 };
 feedbackButton.onclick = function() {
+	console.log('clicked');
 	applyStyles(panelStyles, controlPanel);
 	applyStyles(feedbackButtonStyles, feedbackButton);
 };

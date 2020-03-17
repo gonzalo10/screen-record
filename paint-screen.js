@@ -1,8 +1,5 @@
 var buttonPaint = document.querySelector('#btn-start-painting');
 var buttonScreenShot = document.querySelector('#btn-screenshot');
-var buttonDrawArrow = document.querySelector('#btn-arrow');
-var buttonDrawFree = document.querySelector('#btn-free');
-var buttonDrawRectangle = document.querySelector('#btn-rectangle');
 var screenshotImg = document.getElementById('screenshot');
 
 var myCanvas;
@@ -11,88 +8,26 @@ let ctx2;
 buttonPaint.onclick = function() {
 	container = createOrAssignContainter();
 	ctx2 = createCanvas('rgba(0,0,0,0)', container);
+	var controlPanel = createDiv();
+	var closeButton = createButton('CLOSE', hideCanvas);
+	controlPanel.appendChild(closeButton);
+	var closeButton = createButton('ScreenShot', createAndPaintScreenshot);
+	var freeDrawButton = createButton('Free Draw', () => drawGeometry('free'));
+	var arrowButton = createButton('Arrow', () => drawGeometry('arrow'));
+	var reactangleButton = createButton('Rectangle', () =>
+		drawGeometry('rectangle')
+	);
+	controlPanel.appendChild(freeDrawButton);
+	controlPanel.appendChild(closeButton);
+	controlPanel.appendChild(arrowButton);
+	controlPanel.appendChild(reactangleButton);
+	container.canvasContainer.appendChild(controlPanel);
+	context.strokeStyle = 'rgb(0,255,0)'; // a green line
+	context.lineWidth = 4; // 4 pixels thickness
 };
 buttonScreenShot.onclick = function() {
 	createScreenShot().then(canvas => paintScreenshot(canvas.toDataURL()));
 };
-
-buttonDrawArrow.onclick = function() {
-	drawGeometry('arrow');
-};
-buttonDrawRectangle.onclick = function() {
-	drawGeometry('rectangle');
-};
-buttonDrawFree.onclick = function() {
-	drawGeometry('free');
-};
-
-function drawRectangleOverlay(color, canvasContainer) {
-	if (!myCanvas) {
-		const container = createOrAssignContainter(canvasContainer);
-		const context = createCanvas(color, container);
-
-		// create control panel
-
-		var controlPanel = createDiv();
-		var closeButton = createButton('CLOSE', hideCanvas);
-		controlPanel.appendChild(closeButton);
-		var closeButton = createButton('ScreenShot', createAndPaintScreenshot);
-		var freeDrawButton = createButton('Free Draw', freeDraw);
-		var arrowButton = createButton('Arrow', () => drawGeometry('arrow'));
-		var reactangleButton = createButton('Rectangle', () =>
-			drawRectangleOverlay()
-		);
-		controlPanel.appendChild(freeDrawButton);
-		controlPanel.appendChild(closeButton);
-		controlPanel.appendChild(arrowButton);
-		controlPanel.appendChild(reactangleButton);
-		container.canvasContainer.appendChild(controlPanel);
-		// here we can add new colors and withs to the line
-		// TODO add arrows and squares, and text box
-		context.strokeStyle = 'rgb(0,255,0)'; // a green line
-		context.lineWidth = 4; // 4 pixels thickness
-	} else myCanvas.parentNode.style.visibility = 'visible';
-}
-
-function freeDraw() {
-	myCanvas.parentNode.addEventListener(
-		'mousemove',
-		onMouseMoveOnMyCanvas,
-		false
-	);
-	myCanvas.parentNode.addEventListener(
-		'mousedown',
-		onMouseClickOnMyCanvas,
-		false
-	);
-	myCanvas.parentNode.addEventListener(
-		'mouseup',
-		onMouseClickOnMyCanvas,
-		false
-	);
-}
-
-function onMouseMoveOnMyCanvas(event) {
-	if (myCanvas.drawing) {
-		var mouseX = event.layerX;
-		var mouseY = event.layerY;
-
-		var context = myCanvas.getContext('2d');
-		if (myCanvas.pathBegun == false) {
-			context.beginPath();
-			myCanvas.pathBegun = true;
-		} else {
-			context.lineTo(mouseX, mouseY);
-			context.stroke();
-		}
-	}
-}
-
-function onMouseClickOnMyCanvas(event) {
-	myCanvas.drawing = !myCanvas.drawing;
-	// reset the path when starting over
-	if (myCanvas.drawing) myCanvas.pathBegun = false;
-}
 
 function hideCanvas() {
 	if (myCanvas) {
@@ -141,7 +76,10 @@ function paintScreenshot(screenshotUrl) {
 }
 
 function createAndPaintScreenshot() {
-	return createScreenShot().then(canvas => paintScreenshot(canvas.toDataURL()));
+	return createScreenShot().then(canvas => {
+		console.log(canvas.toDataURL());
+		paintScreenshot(canvas.toDataURL());
+	});
 }
 
 function createButton(text, buttonAction) {
@@ -155,6 +93,7 @@ function createButton(text, buttonAction) {
 function createDiv() {
 	var div = document.createElement('div');
 	div.style.position = 'absolute';
+	div.style.zIndex = '9999';
 	div.style.left = '50%';
 	div.style.top = '0';
 	div.style.transform = 'translate(-50%)';
@@ -169,7 +108,7 @@ function createDiv() {
 }
 
 function drawGeometry(type) {
-	// // NEW
+	// NEW;
 	const ctx = createCanvas('rgba(0,0,0,0)', container);
 	var canvas2 = ctx2.canvas;
 	const canvas = ctx.canvas;
@@ -230,7 +169,6 @@ function drawGeometry(type) {
 			}
 		}
 		function mouseDownFreeMove(event) {
-			console.log('mouse mouseDownFreeMove');
 			canvas2.drawing = true;
 			canvas2.pathBegun = false;
 		}
@@ -281,13 +219,13 @@ function drawGeometry(type) {
 	}
 	// Draw arrows
 	function drawArrows() {
-		function drawFilledPolygon(canvas3, shape) {
-			console.log(canvas3);
-			canvas3.beginPath();
-			canvas3.moveTo(shape[0][0], shape[0][1]);
-			for (p in shape) if (p > 0) canvas3.lineTo(shape[p][0], shape[p][1]);
-			canvas3.lineTo(shape[0][0], shape[0][1]);
-			canvas3.fill();
+		function drawFilledPolygon(context, shape) {
+			context.beginPath();
+			context.moveTo(shape[0][0], shape[0][1]);
+			for (p in shape) if (p > 0) context.lineTo(shape[p][0], shape[p][1]);
+			context.lineTo(shape[0][0], shape[0][1]);
+			context.fillStyle = 'black';
+			context.fill();
 		}
 
 		function translateShape(shape, x, y) {
@@ -315,7 +253,7 @@ function drawGeometry(type) {
 			context.lineTo(x2, y2);
 			context.stroke();
 			var ang = Math.atan2(y2 - y1, x2 - x1);
-			console.log('drawLineArrow');
+			console.log('drawLineArrow', arrow_shape, ang, x2, y2);
 			drawFilledPolygon(
 				context,
 				translateShape(rotateShape(arrow_shape, ang), x2, y2)
@@ -340,7 +278,7 @@ function drawGeometry(type) {
 		}
 
 		function mMove(e) {
-			if (!!drawing) {
+			if (drawing) {
 				var p = get_offset(e);
 				// Constrain the line to the canvas...
 				if (p[0] < 0) p[0] = 0;
@@ -354,10 +292,8 @@ function drawGeometry(type) {
 
 		function mDone(e) {
 			if (drawing) {
-				console.log('mDone');
 				var p = get_offset(e);
 				ctx.clearRect(0, 0, maxx, maxy);
-				console.log(ctx2, ox, oy, p[0], p[1]);
 				drawLineArrow(ctx2, ox, oy, p[0], p[1]);
 				drawing = false;
 			}
@@ -381,10 +317,10 @@ function drawGeometry(type) {
 		}
 
 		var arrow_shape = [
-			[-100, -40],
-			[-80, 0],
-			[-100, 40],
-			[20, 0],
+			[-10, -4],
+			[-8, 0],
+			[-10, 4],
+			[2, 0],
 		];
 
 		var xoff, yoff;

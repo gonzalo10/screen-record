@@ -1,108 +1,319 @@
-<style>
-	html,
-	body {
-		margin: 0 !important;
-		padding: 0 !important;
-		text-align: center;
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-			Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial,
-			sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-		font-size: 1em;
-	}
+<!DOCTYPE html>
+<html>
+	<title>W3.CSS Template</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<style>
+		html,
+		body {
+			margin: 0 !important;
+			padding: 0 !important;
+			text-align: center;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+				Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial,
+				sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+			font-size: 1em;
+		}
 
-	video {
-		width: 40%;
-		border-radius: 5px;
-		border: 1px solid black;
-	}
-	.feedbackButton {
-		width: 100px;
-		height: 40px;
-		text-align: center;
-		right: -30px;
-		top: 50%;
-		transform: translate(0px, -50%) rotate(-90deg);
-		background-color: lightblue;
-		color: blue;
-		border-radius: 5px;
-		position: absolute;
-		cursor: pointer;
-		font-size: 16px;
-	}
+		video {
+			width: 40%;
+			border-radius: 5px;
+			border: 1px solid black;
+		}
+		.feedbackButton {
+			width: 100px;
+			height: 40px;
+			text-align: center;
+			right: -30px;
+			top: 50%;
+			transform: translate(0px, -50%) rotate(-90deg);
+			background-color: lightblue;
+			color: blue;
+			border-radius: 5px;
+			position: absolute;
+			cursor: pointer;
+			font-size: 16px;
+		}
 
-	.controlPanel {
-		display: none;
-	}
-	.close-feedback-button {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		cursor: pointer;
-	}
-	.controlPanelWrapper {
-		display: absolute;
-		z-index: 9999;
-	}
-</style>
+		.controlPanel {
+			display: none;
+		}
+		.close-feedback-button {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			cursor: pointer;
+		}
+		.controlPanelWrapper {
+			display: absolute;
+			z-index: 9999;
+		}
+		body {
+			font-family: 'Times New Roman', Georgia, Serif;
+		}
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-family: 'Playfair Display';
+			letter-spacing: 5px;
+		}
+	</style>
+	<body>
+		<!-- Navbar (sit on top) -->
+		<div class="w3-top">
+			<div
+				class="w3-bar w3-white w3-padding w3-card"
+				style="letter-spacing:4px;"
+			>
+				<a href="#home" class="w3-bar-item w3-button">Gourmet au Catering</a>
+				<!-- Right-sided navbar links. Hide them on small screens -->
+				<div class="w3-right w3-hide-small">
+					<a href="#about" class="w3-bar-item w3-button">About</a>
+					<a href="#menu" class="w3-bar-item w3-button">Menu</a>
+					<a href="#contact" class="w3-bar-item w3-button">Contact</a>
+				</div>
+			</div>
+		</div>
 
-<title>Feedback tool demo</title>
-<h1>Feedback tool demo</h1>
+		<!-- Header -->
+		<header
+			class="w3-display-container w3-content w3-wide"
+			style="max-width:1600px;min-width:500px"
+			id="home"
+		>
+			<img
+				class="w3-image"
+				src="https://assets.biggreenegg.eu/app/uploads/2019/03/28145521/topimage-classic-hamburger-2019m04-800x534.jpg"
+				alt="Hamburger Catering"
+				width="1600"
+				height="800"
+			/>
+			<div class="w3-display-bottomleft w3-padding-large w3-opacity">
+				<h1 class="w3-xxlarge">Le Catering</h1>
+			</div>
+		</header>
 
-<button id="feedback-button" class="feedbackButton">Feedback</button>
-<div id="control-panel" class="controlPanel">
-	<div class="controlPanelWrapper">
-		<h3>Feedback</h3>
-		<div id="close-feedback-button" class="close-feedback-button">X</div>
-		<button id="btn-test-getDisplayMedia">Start recording</button>
-		<button id="btn-stop-getDisplayMedia">Stop recording</button>
-		<button id="btn-start-painting">Start painting</button>
-		<button id="btn-screenshot">Screenshot</button>
-		<button id="btn-arrow">Draw arrow</button>
-		<button id="btn-rectangle">Draw rectangle</button>
-		<button id="btn-free">Draw Free</button>
-		<button id="btn-comment">Add comment</button>
-	</div>
-</div>
+		<!-- Page content -->
+		<div class="w3-content" style="max-width:1100px">
+			<!-- About Section -->
+			<div class="w3-row w3-padding-64" id="about">
+				<div class="w3-col m6 w3-padding-large w3-hide-small">
+					<img
+						src="https://assets.biggreenegg.eu/app/uploads/2019/03/28145521/topimage-classic-hamburger-2019m04-800x534.jpg"
+						class="w3-round w3-image w3-opacity-min"
+						alt="Table Setting"
+						width="600"
+						height="750"
+					/>
+				</div>
 
-<hr />
-<video controls autoplay playsinline muted="false" volume="0"></video>
-<img id="screenshot" width="300px" height="200px" />
+				<div class="w3-col m6 w3-padding-large">
+					<h1 class="w3-center">About Catering</h1>
+					<br />
+					<h5 class="w3-center">Tradition since 1889</h5>
+					<p class="w3-large">
+						The Catering was founded in blabla by Mr. Smith in lorem ipsum dolor
+						sit amet, consectetur adipiscing elit consectetur adipiscing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in
+						reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+						pariatur.We only use
+						<span class="w3-tag w3-light-grey">seasonal</span> ingredients.
+					</p>
+					<p class="w3-large w3-text-grey w3-hide-medium">
+						Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+						officia deserunt mollit anim id est laborum consectetur adipiscing
+						elit, sed do eiusmod temporincididunt ut labore et dolore magna
+						aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+						laboris nisi ut aliquip ex ea commodo consequat.
+					</p>
+				</div>
+			</div>
 
-<div style="position:relative;width:600px;height:400px;" id="canvasgroup">
-	<canvas
-		style="
-		position:absolute;
-		top:0px;
-		left:0px;
-		width:100%;
-		height:100%;"
-		id="final"
-		width="600px"
-		height="400px"
-	></canvas>
-	<canvas
-		style="position: absolute; top:0px; left:0px; outline: 1px solid red; width:100%; height:100%;"
-		id="drawing"
-		width="600px"
-		height="400px"
-	></canvas>
-</div>
-<br />
+			<hr />
 
-<br />
-<script>
-	window.onerror = function(msg, url, lineNo, columnNo, error) {
-		console.log('error logger', msg, url, lineNo, columnNo, error);
-		return false;
-	};
-</script>
-<script type="text/javascript" src="record-screen.js"></script>
-<script type="text/javascript" src="paint-screen.js"></script>
-<script type="text/javascript" src="main.js"></script>
-<script type="text/javascript" src="add-comment.js"></script>
-<script
-	type="text/javascript"
-	src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"
-></script>
+			<!-- Menu Section -->
+			<div class="w3-row w3-padding-64" id="menu">
+				<div class="w3-col l6 w3-padding-large">
+					<h1 class="w3-center">Our Menu</h1>
+					<br />
+					<h4>Bread Basket</h4>
+					<p class="w3-text-grey">
+						Assortment of fresh baked fruit breads and muffins 5.50
+					</p>
+					<br />
 
-<script src="https://www.webrtc-experiment.com/common.js"></script>
+					<h4>Honey Almond Granola with Fruits</h4>
+					<p class="w3-text-grey">
+						Natural cereal of honey toasted oats, raisins, almonds and dates
+						7.00
+					</p>
+					<br />
+
+					<h4>Belgian Waffle</h4>
+					<p class="w3-text-grey">
+						Vanilla flavored batter with malted flour 7.50
+					</p>
+					<br />
+
+					<h4>Scrambled eggs</h4>
+					<p class="w3-text-grey">
+						Scrambled eggs, roasted red pepper and garlic, with green onions
+						7.50
+					</p>
+					<br />
+
+					<h4>Blueberry Pancakes</h4>
+					<p class="w3-text-grey">
+						With syrup, butter and lots of berries 8.50
+					</p>
+				</div>
+
+				<div class="w3-col l6 w3-padding-large">
+					<img
+						src="https://assets.biggreenegg.eu/app/uploads/2019/03/28145521/topimage-classic-hamburger-2019m04-800x534.jpg"
+						class="w3-round w3-image w3-opacity-min"
+						alt="Menu"
+						style="width:100%"
+					/>
+				</div>
+			</div>
+
+			<hr />
+
+			<!-- Contact Section -->
+			<div class="w3-container w3-padding-64" id="contact">
+				<h1>Contact</h1>
+				<br />
+				<p>
+					We offer full-service catering for any event, large or small. We
+					understand your needs and we will cater the food to satisfy the
+					biggerst criteria of them all, both look and taste. Do not hesitate to
+					contact us.
+				</p>
+				<p class="w3-text-blue-grey w3-large">
+					<b>Catering Service, 42nd Living St, 43043 New York, NY</b>
+				</p>
+				<p>
+					You can also contact us by phone 00553123-2323 or email
+					catering@catering.com, or you can send us a message here:
+				</p>
+				<form action="/action_page.php" target="_blank">
+					<p>
+						<input
+							class="w3-input w3-padding-16"
+							type="text"
+							placeholder="Name"
+							required
+							name="Name"
+						/>
+					</p>
+					<p>
+						<input
+							class="w3-input w3-padding-16"
+							type="number"
+							placeholder="How many people"
+							required
+							name="People"
+						/>
+					</p>
+					<p>
+						<input
+							class="w3-input w3-padding-16"
+							type="datetime-local"
+							placeholder="Date and time"
+							required
+							name="date"
+							value="2017-11-16T20:00"
+						/>
+					</p>
+					<p>
+						<input
+							class="w3-input w3-padding-16"
+							type="text"
+							placeholder="Message \ Special requirements"
+							required
+							name="Message"
+						/>
+					</p>
+					<p>
+						<button class="w3-button w3-light-grey w3-section" type="submit">
+							SEND MESSAGE
+						</button>
+					</p>
+				</form>
+			</div>
+
+			<!-- End page content -->
+		</div>
+
+		<!-- Footer -->
+		<footer class="w3-center w3-light-grey w3-padding-32">
+			<p>
+				Powered by
+				<a
+					href="https://www.w3schools.com/w3css/default.asp"
+					title="W3.CSS"
+					target="_blank"
+					class="w3-hover-text-green"
+					>w3.css</a
+				>
+			</p>
+		</footer>
+		<button id="feedback-button" class="feedbackButton">Feedback</button>
+		<div id="control-panel" class="controlPanel">
+			<div class="controlPanelWrapper">
+				<h3>Feedback</h3>
+				<div id="close-feedback-button" class="close-feedback-button">X</div>
+				<button id="btn-test-getDisplayMedia">Start recording</button>
+				<button id="btn-stop-getDisplayMedia">Stop recording</button>
+				<button id="btn-start-painting">Start painting</button>
+				<button id="btn-screenshot">Screenshot</button>
+				<button id="btn-comment">Add comment</button>
+			</div>
+		</div>
+		<img id="screenshot" width="300px" height="200px" />
+	</body>
+
+	<!-- <button id="feedback-button" class="feedbackButton">Feedback</button>
+	<div id="control-panel" class="controlPanel">
+		<div class="controlPanelWrapper">
+			<h3>Feedback</h3>
+			<div id="close-feedback-button" class="close-feedback-button">X</div>
+			<button id="btn-test-getDisplayMedia">Start recording</button>
+			<button id="btn-stop-getDisplayMedia">Stop recording</button>
+			<button id="btn-start-painting">Start painting</button>
+			<button id="btn-screenshot">Screenshot</button>
+			<button id="btn-comment">Add comment</button>
+		</div>
+	</div> -->
+
+	<hr />
+	<!-- <video controls autoplay playsinline muted="false" volume="0"></video> -->
+	<!-- <img id="screenshot" width="300px" height="200px" /> -->
+
+	<br />
+
+	<br />
+	<script>
+		window.onerror = function(msg, url, lineNo, columnNo, error) {
+			console.log('error logger', msg, url, lineNo, columnNo, error);
+			return false;
+		};
+	</script>
+	<script type="text/javascript" src="./record-screen.js"></script>
+	<script type="text/javascript" src="./paint-screen.js"></script>
+	<script type="text/javascript" src="./main.js"></script>
+	<script type="text/javascript" src="./add-comment.js"></script>
+	<script
+		type="text/javascript"
+		src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"
+	></script>
+
+	<script src="https://www.webrtc-experiment.com/common.js"></script>
+</html>
