@@ -15,14 +15,15 @@ const addComment = e => {
 	var yPosition = e.pageY - e.target.offsetTop;
 
 	if (paintable) {
+		console.log('xPosition', xPosition);
 		var comment = document.createElement('div');
 		comment.style.width = '100px';
 		comment.style.height = '100px';
 		comment.style.border = '1px solid red';
 		comment.style.position = 'absolute';
 		comment.style.zIndex = '9999';
-		comment.style.top = yPosition;
-		comment.style.left = xPosition;
+		comment.style.top = `${yPosition}px`;
+		comment.style.left = `${xPosition}px`;
 		comment.contentEditable = 'true';
 		var body = document.getElementsByTagName('BODY')[0];
 		body.appendChild(comment);
