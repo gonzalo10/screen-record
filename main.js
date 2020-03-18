@@ -3,11 +3,11 @@ var controlPanel = document.querySelector('#control-panel');
 var closeFeedbackPanel = document.querySelector('#close-feedback-button');
 
 const panelStyles = {
-	position: 'absolute',
-	bottom: '0px',
-	right: '0',
-	height: '200px',
-	width: '200px',
+	position: 'sticky',
+	bottom: '0',
+	left: '100%',
+	height: '210px',
+	width: '400px',
 	display: 'flex',
 	flexDirection: 'column',
 	backgroundColor: 'lightblue',

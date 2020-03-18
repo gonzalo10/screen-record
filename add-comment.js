@@ -8,20 +8,24 @@ buttonComment.onclick = () => {
 	counter = 0;
 };
 
+const commentStyles = {
+	width: '150px',
+	padding: '10px',
+	height: '100px',
+	border: '1px solid red',
+	position: 'absolute',
+	zIndex: '9999',
+	background: '#ffffffb3',
+	borderRadius: '35px',
+};
+
 const addComment = e => {
-	// var xPosition = e.clientX;
-	// var yPosition = e.clientY;
 	var xPosition = e.pageX - e.target.offsetLeft;
 	var yPosition = e.pageY - e.target.offsetTop;
 
 	if (paintable) {
-		console.log('xPosition', xPosition);
 		var comment = document.createElement('div');
-		comment.style.width = '100px';
-		comment.style.height = '100px';
-		comment.style.border = '1px solid red';
-		comment.style.position = 'absolute';
-		comment.style.zIndex = '9999';
+		applyStyles(commentStyles, comment);
 		comment.style.top = `${yPosition}px`;
 		comment.style.left = `${xPosition}px`;
 		comment.contentEditable = 'true';

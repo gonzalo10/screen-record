@@ -5,6 +5,8 @@ var screenshotImg = document.getElementById('screenshot');
 var myCanvas;
 let container;
 let ctx2;
+const COLOR_STROKE = 'rgb(0,255,0)';
+const LINE_STROKE_WIDTH = 4;
 buttonPaint.onclick = function() {
 	container = createOrAssignContainter();
 	ctx2 = createCanvas('rgba(0,0,0,0)', container);
@@ -22,8 +24,6 @@ buttonPaint.onclick = function() {
 	controlPanel.appendChild(arrowButton);
 	controlPanel.appendChild(reactangleButton);
 	container.canvasContainer.appendChild(controlPanel);
-	context.strokeStyle = 'rgb(0,255,0)'; // a green line
-	context.lineWidth = 4; // 4 pixels thickness
 };
 buttonScreenShot.onclick = function() {
 	createScreenShot().then(canvas => paintScreenshot(canvas.toDataURL()));
@@ -46,6 +46,8 @@ function createCanvas(color, container) {
 	myCanvas.style.left = '0px';
 	myCanvas.style.top = '0px';
 	var context = myCanvas.getContext('2d');
+	context.strokeStyle = COLOR_STROKE; // a green line
+	context.lineWidth = LINE_STROKE_WIDTH; // 4 pixels thickness
 	context.fillStyle = color;
 	context.fillRect(0, 0, myCanvas.width, myCanvas.height);
 	container.canvasContainer.appendChild(myCanvas);
@@ -77,33 +79,46 @@ function paintScreenshot(screenshotUrl) {
 
 function createAndPaintScreenshot() {
 	return createScreenShot().then(canvas => {
-		console.log(canvas.toDataURL());
 		paintScreenshot(canvas.toDataURL());
 	});
 }
+const drawButtonStyles = {
+	background: '#7795f8',
+	color: 'white',
+	fontFamily: 'Camphor,Open Sans,Segoe UI,sans-serif',
+	border: '1px solid transparent',
+	borderRadius: '5px',
+	fontSize: '12px',
+	padding: '7px',
+};
 
 function createButton(text, buttonAction) {
 	var Button = document.createElement('button');
 	Button.onclick = buttonAction;
-	Button.style.background = '#f00';
+	applyStyles(drawButtonStyles, Button);
 	ButtonText = document.createTextNode(text);
 	Button.appendChild(ButtonText);
 	return Button;
 }
+const drawPanelControl = {
+	backgroundColor: '#ffffffba',
+	border: '1px solid transparent',
+	borderRadius: '5px',
+	position: 'absolute',
+	zIndex: '9999',
+	left: '50%',
+	top: '0',
+	transform: 'translate(-50%)',
+	width: '500px',
+	height: '75px',
+	border: '1px solid lightblue',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'space-evenly',
+};
 function createDiv() {
 	var div = document.createElement('div');
-	div.style.position = 'absolute';
-	div.style.zIndex = '9999';
-	div.style.left = '50%';
-	div.style.top = '0';
-	div.style.transform = 'translate(-50%)';
-	div.style.width = '300px';
-	div.style.height = '50px';
-	div.style.background = 'transparent';
-	div.style.border = '1px solid lightblue';
-	div.style.display = 'flex';
-	div.style.alignItems = 'center';
-	div.style.justifyContent = 'space-evenly';
+	applyStyles(drawPanelControl, div);
 	return div;
 }
 
@@ -224,7 +239,7 @@ function drawGeometry(type) {
 			context.moveTo(shape[0][0], shape[0][1]);
 			for (p in shape) if (p > 0) context.lineTo(shape[p][0], shape[p][1]);
 			context.lineTo(shape[0][0], shape[0][1]);
-			context.fillStyle = 'black';
+			context.fillStyle = COLOR_STROKE;
 			context.fill();
 		}
 
@@ -317,10 +332,10 @@ function drawGeometry(type) {
 		}
 
 		var arrow_shape = [
-			[-10, -4],
-			[-8, 0],
-			[-10, 4],
-			[2, 0],
+			[-20, -8],
+			[-16, 0],
+			[-20, 8],
+			[4, 0],
 		];
 
 		var xoff, yoff;

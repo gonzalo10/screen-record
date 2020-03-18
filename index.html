@@ -46,8 +46,9 @@
 			cursor: pointer;
 		}
 		.controlPanelWrapper {
-			display: absolute;
 			z-index: 9999;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
 		}
 		body {
 			font-family: 'Times New Roman', Georgia, Serif;
@@ -60,6 +61,34 @@
 		h6 {
 			font-family: 'Playfair Display';
 			letter-spacing: 5px;
+		}
+		.feedbackTitle {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+				Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial,
+				sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+		}
+		.recordButton {
+			white-space: nowrap;
+			display: inline-block;
+			height: 40px;
+			line-height: 40px;
+			padding: 0 14px;
+			margin-bottom: 10px;
+			box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11),
+				0 1px 3px rgba(0, 0, 0, 0.08);
+			border-radius: 4px;
+			font-size: 15px;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 0.025em;
+			text-decoration: none;
+			transition: all 0.15s ease;
+			margin-right: 23px;
+			color: #fff;
+			background: #3ecf8e;
+			border: 1px solid transparent;
+			text-shadow: 0 1px 3px rgba(36, 180, 126, 0.4);
+			cursor: pointer;
 		}
 	</style>
 	<body>
@@ -267,31 +296,22 @@
 		</footer>
 		<button id="feedback-button" class="feedbackButton">Feedback</button>
 		<div id="control-panel" class="controlPanel">
+			<h3 class="feedbackTitle">Feedback</h3>
 			<div class="controlPanelWrapper">
-				<h3>Feedback</h3>
 				<div id="close-feedback-button" class="close-feedback-button">X</div>
-				<button id="btn-test-getDisplayMedia">Start recording</button>
-				<button id="btn-stop-getDisplayMedia">Stop recording</button>
-				<button id="btn-start-painting">Start painting</button>
-				<button id="btn-screenshot">Screenshot</button>
-				<button id="btn-comment">Add comment</button>
+				<button id="btn-start-painting" class="recordButton">Painting</button>
+				<button id="btn-screenshot" class="recordButton">Screenshot</button>
+				<button id="btn-comment" class="recordButton">Add comment</button>
+				<button id="btn-test-getDisplayMedia" class="recordButton">
+					Record
+				</button>
+				<button id="btn-stop-getDisplayMedia" class="recordButton">
+					Stop recording
+				</button>
 			</div>
 		</div>
 		<img id="screenshot" width="300px" height="200px" />
 	</body>
-
-	<!-- <button id="feedback-button" class="feedbackButton">Feedback</button>
-	<div id="control-panel" class="controlPanel">
-		<div class="controlPanelWrapper">
-			<h3>Feedback</h3>
-			<div id="close-feedback-button" class="close-feedback-button">X</div>
-			<button id="btn-test-getDisplayMedia">Start recording</button>
-			<button id="btn-stop-getDisplayMedia">Stop recording</button>
-			<button id="btn-start-painting">Start painting</button>
-			<button id="btn-screenshot">Screenshot</button>
-			<button id="btn-comment">Add comment</button>
-		</div>
-	</div> -->
 
 	<hr />
 	<!-- <video controls autoplay playsinline muted="false" volume="0"></video> -->
